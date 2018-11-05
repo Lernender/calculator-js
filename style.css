@@ -1,0 +1,91 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    color: black;
+    background-image: linear-gradient(to right, #ff9a9e, #fad0c4);
+}
+
+button {
+    font-size: 20px;
+}
+
+button:nth-child(4) {
+    background-color: #ff9a9e;
+}
+
+button:nth-child(8) {
+    background-color: #ff9a9e;
+}
+
+button:nth-child(12) {
+    background-color: #ff9a9e;
+}
+
+button:nth-child(16) {
+    background-color: #ff9a9e;
+}
+
+button:nth-child(20) {
+    background-color: #ff9a9e;
+}
+
+#container {
+    width: 1000px;
+    height: 550px;
+    margin: 80px auto;
+}
+
+#calculator {
+    width: 320px;
+    height: 520px;
+    background-color: #eaedef;
+    margin: 0 auto;
+    top: 20px;
+    position: relative;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#result {
+    height: 120px;
+}
+
+#history {
+    text-align: right;
+    height: 20px;
+    margin: 0 20px;
+    padding-top: 20px;
+    font-size: 15px;
+    color: #6f696b;
+}
+
+#output{
+    text-align: right;
+    height: 60px;
+    margin: 10px 20px;
+    font-size: 30px;
+}
+
+#keyboard{
+    height: 400px;
+}
+
+.button {
+    width: 50px;
+    height: 50px;
+    margin: 15px;
+    float: left;
+    border-radius: 80%;
+    border-width: 0;
+    cursor: pointer;
+}
+
+.number, .empty{
+    background-color: #eaedef;
+}
+
+.button:focus {
+    outline: 0;
+    color: #fad0c4;
+}
+
