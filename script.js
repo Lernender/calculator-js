@@ -28,6 +28,7 @@ function printOutput(num) {
 function getFormattedNumber(num) {
   if (num == "-") {
     return "";
+    //koma angezeigt wird.
   }
   var n = Number(num);
   var value = n.toLocaleString("en");

@@ -1,84 +1,55 @@
-class Math {
-  constructor(operator, number, empty, clear) {
-    this.operator = new operator;
-    this.number = new number;
-    this.empty = new empty;
-    this.clear = new clear;
+class Calculator {
+  constructor(numbers, operators, output, history) {
+    this._numbers = numbers;
+    this._operators = operators;
+    this._output = output;
+    this._history = history;
 
-  //arrow
-  for (let i = 0; i < operator.length; i++) {
-    operator[i].addEventListener('click', function () {
-    if (id == "clear") {
+    this.addEventListeners();
+  }
 
-      printHistory("");
-      printOutput("");
+  get numbers() {
+    return this._numbers;
+  }
 
+  get operators() {
+    return this._operators;
+  }
+
+  get output() {
+    return this._output;
+  }
+
+  get history() {
+    return this._history;
+  }
+
+  addEventListeners() {
+    this.numbers.forEach(number => number.addEventListener('click', this.clickHandler.bind(this), false));
+    this.operators.forEach(operator => operator.addEventListener('click', this.clickHandler.bind(this), false));
+  }
+
+  clickHandler({ target }) {
+    const value = target.id;
+
+    if (Utils.isNumeric(value)) {
+      // Number
+      console.log(Utils.isNumeric(value));
+    } else {
+      // Operator
     }
-  window.addEventListener('click', this.keyboard.bind(this));
-
-
-      keyboard() {
-        this.operator.keyboard();
-        this.number.keyboard();
-        this.empty.keyboard();
-        this.clear.keyboard();
-      }
-
-
-        class Result {
-  constructor(history, output, number,value) {
-    this.history = new history;
-    this.output = new output;
-    this.number = new number;
-    this.value = new value;
-  }
-
-  get _History() {
-    return this.history;
-  }
-
-  get _Output() {
-    return this.output;
-  }
-
-  printHistory(num) {
-    this._History.innerText = num;
-  }
-
-  printOutput(num) {
-    if (num == "") {
-      this._History.innerText = num;
-    }
-    else (this._Output.innerText = getFormattedNumber(num);
   }
 }
 
-// Zahl aus String ausgeben
-function getFormattedNumber(num) {
-  if (num == "-") {
-    return "";
+class Utils {
+  static isNumeric(value) {
+    return !isNaN(value);
   }
-  const n = Number(num);
-  let value = n.toLocaleString("en");
-  return value;
 }
 
-// ersetzen
-function reverseNumberFormat(num) {
-  return Number(num.replace(/,/g, ''));
-}
-
-
-
-
-new Math(document.getElementById('keyboard'), {
-  operator: document.getElementsByClassName('operator'),
-  number: document.getElementsByClassName('number'),
-  empty: document.getElementsByClassName('empty'),
-  clear: document.getElementById('clear')
-});
-
-new Result(document.getElementById('result'), {
-  history: document.getElementById('history-value'),
-  output: document.getElementById('output-value'),
-});
+const calculator = new Calculator (
+  document.querySelectorAll('.number'),
+  document.querySelectorAll('.operator'),
+  document.getElementById('output-value'),
+  document.getElementById('history-value')
+);
