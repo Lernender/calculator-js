@@ -1,19 +1,15 @@
 class Calculator {
-  constructor(numbers, operators, output, history) {
-    this._numbers = numbers;
-    this._operators = operators;
+  constructor(buttons, output, history) {
+    this._buttons = buttons;
     this._output = output;
     this._history = history;
 
-    this.addEventListeners();
+    // Event Listener
+    this.buttons.forEach(button => button.addEventListener('click', this.clickHandler.bind(this), false));
   }
 
-  get numbers() {
-    return this._numbers;
-  }
-
-  get operators() {
-    return this._operators;
+  get buttons() {
+    return this._buttons;
   }
 
   get output() {
@@ -24,32 +20,94 @@ class Calculator {
     return this._history;
   }
 
-  addEventListeners() {
-    this.numbers.forEach(number => number.addEventListener('click', this.clickHandler.bind(this), false));
-    this.operators.forEach(operator => operator.addEventListener('click', this.clickHandler.bind(this), false));
-  }
-
   clickHandler({ target }) {
     const value = target.id;
 
+    // Numbers
     if (Utils.isNumeric(value)) {
-      // Number
-      console.log(Utils.isNumeric(value));
-    } else {
-      // Operator
+      let output = Utils.reverseNumberFormat(this.readOutput());
+
+      if (Utils.isNumeric(output)) {
+        output = output + value;
+
+        this.writeOutput(output);
+      }
+    }
+    // Operators
+
+    else {
+      let output = this.readOutput();
+      let history = this.readHistory();
+
+      if (output === '' && history !== '') {
+        if (isNaN(history[history.length - 1])) {
+          history = history.substr(0, history.length - 1);
+        }
+      }
+      if (output !== '' || history !== ''{
+        output = output === '' ? output : Utils.reverseNumberFormat(number);
+        history = history + output;
+        if (this.id === '' = '') {
+          let result = eval(history);
+          this.writeOutput(result);
+          this.writeHistory('');
+        }
+
+        else {
+            history = history + this.id;
+            this.writeHistory(history);
+            this.writeOutput()('');
+        }
+      }
     }
   }
+
+  readOutput() {
+    return this.output.innerText;
+  }
+
+  writeOutput(number) {
+    if (number === '') {
+      this.output.innerText = number;
+    } else {
+      this.output.innerText = Utils.getFormattedNumber(number);
+    }
+  }
+
+  readHistory() {
+    return this.history.innerText
+  }
+
+  writeHistory(value) {
+    this.history.innerText = value;
+  }
 }
+
 
 class Utils {
   static isNumeric(value) {
     return !isNaN(value);
   }
+
+  static getFormattedNumber(number) {
+    if (number === '-') {
+      return '';
+    }
+
+    const num = Number(number);
+
+    // TODO: Change to 'de-CH' number format
+    return num.toLocaleString('en');
+  }
+
+  static reverseNumberFormat(number) {
+    // FIXME: regex for Swiss number format
+    return Number(number.replace(/,/g, ''));
+  }
 }
 
 const calculator = new Calculator (
-  document.querySelectorAll('.number'),
-  document.querySelectorAll('.operator'),
+  document.querySelectorAll('.button'),
   document.getElementById('output-value'),
   document.getElementById('history-value')
 );
